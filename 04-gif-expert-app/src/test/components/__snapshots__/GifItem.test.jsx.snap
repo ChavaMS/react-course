@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas en <GiftItem /> Debe de hacer match con el snapshot 1`] = `
+<div>
+  <div
+    class="card"
+  >
+    <img
+      alt=""
+      src=""
+    />
+    <p />
+  </div>
+</div>
+`;
+
+exports[`Pruebas en >GiftItem /> Debe de hacer match con el snapshot 1`] = `
+<div>
+  <div
+    class="card"
+  >
+    <img
+      alt=""
+      src=""
+    />
+    <p />
+  </div>
+</div>
+`;

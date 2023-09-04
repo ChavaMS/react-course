@@ -12,10 +12,11 @@ import './index.css'
 // import { Memorize } from './06-memo/Memorize';
 // import { MemoHook } from './06-memo/MemorizeHook';
 // import { CallbackHook } from './06-memo/CallbackHook';
+import './08-usereducer/intro-reducer';
 import { Padre } from './06-memo/Padre';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+/* ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Padre />
   </React.StrictMode>,
-)
+) */

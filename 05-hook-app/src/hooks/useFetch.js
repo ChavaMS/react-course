@@ -4,7 +4,7 @@ export const useFetch = (url) => {
 
     const [state, setState] = useState({
         data: null,
-        isLLoading: true,
+        isLoading: true,
         hasError: null
     });
 
@@ -12,7 +12,7 @@ export const useFetch = (url) => {
 
         setState({
             ...state,
-            isLLoading: true
+            isLoading: true
         })
 
         const resp = await fetch(url);
@@ -20,7 +20,7 @@ export const useFetch = (url) => {
 
         setState({
             data,
-            isLLoading: false,
+            isLoading: false,
             hasError: null
         });
     }
@@ -32,7 +32,7 @@ export const useFetch = (url) => {
 
     return {
         data: state.data,
-        isLLoading: state.isLLoading,
+        isLoading: state.isLoading,
         hasError: state.hasError
     };
 }

@@ -24,7 +24,7 @@ import { HomePage } from './09-useContext/HomePage';
 import { LoginPage } from './09-useContext/LoginPage';
 import { AboutPage } from './09-useContext/AboutPage';
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainApp />,

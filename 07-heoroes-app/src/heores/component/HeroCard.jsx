@@ -14,7 +14,7 @@ export const HeroCard = ({ id, superhero, publisher, alter_ego, first_appearance
     const charactersByHero = (<p>{characters}</p>);
 
     return (
-        <div className="col">
+        <div className="col animate__animated animate__fadeIn">
             <div className="card">
                 <div className="row no-gutters">
                     <div className="col-4">
@@ -35,7 +35,7 @@ export const HeroCard = ({ id, superhero, publisher, alter_ego, first_appearance
                                 <small className="text-muted">{first_appearance}</small>
                             </p>
 
-                            <Link to={`/heroe/${id}`} > Mas... </Link>
+                            <Link to={`/hero/${id}`} > Mas... </Link>
                         </div>
                     </div>
                 </div>

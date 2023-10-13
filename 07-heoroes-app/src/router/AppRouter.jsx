@@ -4,16 +4,18 @@ import {
 } from 'react-router-dom';
 import { LoginPage } from '../auth/pages';
 import { HeroesRoutes } from '../heores/routes/HeroesRoutes';
-import { childrenHeroesRoutes } from '../heores/routes/ChildrenHeroesRoutes'; 
+import { childrenHeroesRoutes } from '../heores/routes/ChildrenHeroesRoutes';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
 
 export const router = createBrowserRouter([
     {
         path: "login",
-        element: <LoginPage />
+        element: <PublicRoute> <LoginPage /> </PublicRoute>
     },
     {
         path: "/*",
-        element: <HeroesRoutes />,
+        element: <PrivateRoute> <HeroesRoutes /> </PrivateRoute>,
         children: childrenHeroesRoutes
     }
 ]);

@@ -8,7 +8,8 @@ import { childrenHeroesRoutes } from '../heores/routes/ChildrenHeroesRoutes';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 
-export const router = createBrowserRouter([
+
+export const routes = [
     {
         path: "login",
         element: <PublicRoute> <LoginPage /> </PublicRoute>
@@ -18,13 +19,15 @@ export const router = createBrowserRouter([
         element: <PrivateRoute> <HeroesRoutes /> </PrivateRoute>,
         children: childrenHeroesRoutes
     }
-]);
+];
+
+export const browserRouter = createBrowserRouter(routes);
 
 
 export const AppRouter = () => {
     return (
         <>
-            <RouterProvider router={router} />
+            <RouterProvider router={browserRouter} />
         </>
     )
 }

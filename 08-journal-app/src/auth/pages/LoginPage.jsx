@@ -5,24 +5,33 @@ import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkingAuthentication, startGoogleSignIn } from '../../store/auth';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+
+const formData = {
+  email: '',
+  password: '',
+};
+
+const formValidations = {
+  email: [(value) => value.includes('@'), 'El email debe de tener una @'],
+  password: [(value) => value.length >= 6, 'El password debe de tener mas de 6 letras'],
+}
 
 export const LoginPage = () => {
 
   const { status } = useSelector(state => state.auth);
+  const { formSubmitted, setFormSubmited } = useState(false);
 
   const dispatch = useDispatch();
-  const { email, password, onInputChange } = useForm({
-    email: 'chava@gmail.com',
-    password: '12345'
-  });
+  const { email, password, emailValid, passwordValid, onInputChange } = useForm(formData, formValidations);
 
   const isAuthenticating = useMemo(() => status === 'checking', [status]);
 
   const onSubmit = (event) => {
     event.preventDefault();
+    setFormSubmited(true);
     dispatch(checkingAuthentication());
-    console.log({ email, password });
+
   };
 
   const onGoogleSignIn = () => {
@@ -41,6 +50,8 @@ export const LoginPage = () => {
               fullWidth
               name='email'
               value={email}
+              error={!!emailValid && formSubmitted}
+              helperText={emailValid}
               onChange={onInputChange} />
           </Grid>
 
@@ -51,6 +62,8 @@ export const LoginPage = () => {
               placeholder='Contraseña'
               fullWidth name='password'
               value={password}
+              error={!!passwordValid && formSubmitted}
+              helperText={passwordValid}
               onChange={onInputChange} />
           </Grid>
 

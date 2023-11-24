@@ -4,6 +4,8 @@ import { AuthRouter } from '../auth/routes/AuthRouter';
 import { ErrorPage } from '../ui/ErrorPage';
 import { JournalRouter } from '../journal/routes/JournalRouter';
 import { JournalRoutes } from '../journal/routes/JournalRoutes';
+import { CheckingAuth } from '../ui';
+import { useCheckAuth } from '../hooks';
 
 
 const routesConfig = createBrowserRouter([
@@ -28,6 +30,13 @@ const routesConfig = createBrowserRouter([
 ]);
 
 export const AppRouter = () => {
+
+    const status = useCheckAuth();
+
+    if (status === 'checking') {
+        return <CheckingAuth />
+    }
+
     return (
         <RouterProvider router={routesConfig} />
     )

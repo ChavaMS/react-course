@@ -33,8 +33,17 @@ export const registerUserWithEmailPassword = async ({ email, password, displayNa
     try {
         const resp = await createUserWithEmailAndPassword(FirebaseAuth, email, password);
         const { uid, photoURL } = resp.user;
+        console.log(resp.user);
         await updateProfile(FirebaseAuth.currentUser, { displayName: displayName });
 
+        return {
+            ok: true,
+            uid,
+            photoURL,
+            email,
+            displayName,
+            errorMessage: null
+        }
 
     } catch (error) {
         return {
@@ -47,7 +56,15 @@ export const registerUserWithEmailPassword = async ({ email, password, displayNa
 export const loginWithEmailPassword = async ({ email, password }) => {
     try {
         const resp = await signInWithEmailAndPassword(FirebaseAuth, email, password);
-        console.log(resp);
+        const { displayName, photoURL, uid } = resp.user;
+
+        return {
+            ok: true,
+            displayName,
+            photoURL,
+            uid,
+            errorMessage: null
+        }
 
     } catch (error) {
         return {

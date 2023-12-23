@@ -1,7 +1,14 @@
+import { collection, deleteDoc, getDocs } from "firebase/firestore";
+import {
+  addNewEmptyNote,
+  savingNewNote,
+  setActiveNote,
+} from "../../../src/store/journal/journalSlice";
 import { startNewNote } from "../../../src/store/journal/thunks";
+import { FirebaseDB } from "../../../src/firebase/config";
 
 describe("Pruebas en Journal thunks", () => {
-  const dispach = jest.fn();
+  const dispatch = jest.fn();
   const getState = jest.fn();
 
   beforeEach(() => jest.clearAllMocks());
@@ -10,7 +17,33 @@ describe("Pruebas en Journal thunks", () => {
     const uid = "TEST-UID";
     getState.mockReturnValue({ auth: { uid: uid } });
 
-    await startNewNote()(dispach, getState);
+    await startNewNote()(dispatch, getState);
 
+    expect(dispatch).toHaveBeenCalledWith(savingNewNote(true));
+    expect(dispatch).toHaveBeenCalledWith(
+      addNewEmptyNote({
+        body: "",
+        title: "",
+        id: expect.any(String),
+        date: expect.any(Number),
+      })
+    );
+    expect(dispatch).toHaveBeenCalledWith(
+      setActiveNote({
+        body: "",
+        title: "",
+        id: expect.any(String),
+        date: expect.any(Number),
+      })
+    );
+
+    //Borrar de firebase
+    const collectionRef = collection(FirebaseDB, `${uid}/journal/notes`);
+    const docs = await getDocs(collectionRef);
+
+    const deletePromises = [];
+    docs.forEach((doc) => deletePromises.push(deleteDoc(doc.ref)));
+
+    await Promise.all(deletePromises);
   });
 });
